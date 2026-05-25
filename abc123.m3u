@@ -611,38 +611,6 @@ http://45.192.97.170:8880/play/803.m3u8
 http://45.192.97.170:8880/play/804.m3u8
 #EXTINF:-1 tvg-name="邵氏喜剧" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/邵氏喜剧.png" group-title="港湾频道",邵氏喜剧
 http://45.192.97.170:8880/play/805.m3u8
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV1.png" group-title="央视电信",CCTV1
-http://45.192.97.170:8880/play/1554.m3u8
-#EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV2.png" group-title="央视电信",CCTV2
-http://45.192.97.170:8880/play/1555.m3u8
-#EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV3.png" group-title="央视电信",CCTV3
-http://45.192.97.170:8880/play/1556.m3u8
-#EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV4.png" group-title="央视电信",CCTV4
-http://45.192.97.170:8880/play/1557.m3u8
-#EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV5.png" group-title="央视电信",CCTV5
-http://45.192.97.170:8880/play/1558.m3u8
-#EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV5+.png" group-title="央视电信",CCTV5+
-http://45.192.97.170:8880/play/1559.m3u8
-#EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV6.png" group-title="央视电信",CCTV6
-http://45.192.97.170:8880/play/1560.m3u8
-#EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV7.png" group-title="央视电信",CCTV7
-http://45.192.97.170:8880/play/1561.m3u8
-#EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV8.png" group-title="央视电信",CCTV8
-http://45.192.97.170:8880/play/1562.m3u8
-#EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV9.png" group-title="央视电信",CCTV9
-http://45.192.97.170:8880/play/1563.m3u8
-#EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV10.png" group-title="央视电信",CCTV10
-http://45.192.97.170:8880/play/1564.m3u8
-#EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV11.png" group-title="央视电信",CCTV11
-http://45.192.97.170:8880/play/1565.m3u8
-#EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV12.png" group-title="央视电信",CCTV12
-http://45.192.97.170:8880/play/1566.m3u8
-#EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV14.png" group-title="央视电信",CCTV14
-http://45.192.97.170:8880/play/1567.m3u8
-#EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV15.png" group-title="央视电信",CCTV15
-http://45.192.97.170:8880/play/1568.m3u8
-#EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/CCTV17.png" group-title="央视电信",CCTV17
-http://45.192.97.170:8880/play/1569.m3u8
 #EXTINF:-1 tvg-name="湖北荆门新闻" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/湖北荆门新闻.png" group-title="🀅湖北",湖北荆门新闻
 http://45.192.97.170:8880/play/5080.m3u8
 #EXTINF:-1 tvg-name="湖北荆门教育" tvg-logo="https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/湖北荆门教育.png" group-title="🀅湖北",湖北荆门教育
