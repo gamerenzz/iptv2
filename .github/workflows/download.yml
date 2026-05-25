@@ -1,4 +1,4 @@
-name: Auto Download IPTV M3U to config
+name: Download and Filter IPTV M3U
 
 on:
   schedule:
@@ -7,38 +7,122 @@ on:
   workflow_dispatch: # 支持手动点击触发
 
 permissions:
-  contents: write # 赋予 Action 往仓库推送文件的权限
+  contents: write # 赋予推送权限
 
 jobs:
-  download_job:
+  download_and_filter:
     runs-on: ubuntu-latest
     steps:
       # 1. 拉取仓库代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 创建文件夹并下载文件
-      - name: Download M3U File to config
+      # 2. 创建文件夹并下载原始 M3U 文件
+      - name: Download Original M3U File
         run: |
-          # 创建 config 文件夹（如果该文件夹已存在，-p 参数会确保不报错）
           mkdir -p config
-          
-          # 将文件下载并保存至 config 目录下
           curl -L -s -o config/abc123.m3u "https://iptv.renzz.cc.cd/abc123"
 
-      # 3. 提交变动回仓库
+      # 3. 运行过滤逻辑，生成新文件到根目录
+      - name: Filter M3U File
+        run: |
+          cat << 'EOF' > filter.js
+          const fs = require('fs');
+          const path = require('path');
+
+          // ==================== 自定义配置区域 ====================
+          // 1. 精确屏蔽：在这里填入你“完全不想生成”的分组名称
+          const EXCLUDE_EXACT = [
+            "体育0524",
+            "体育0525",
+            "体育0526"
+            // 以后如果有其他分组不要，直接在下方添加，例如：
+            // "精彩-YY",
+            // "儿童动漫"
+          ];
+
+          // 2. 模糊/正则屏蔽：如果你想屏蔽一整类分组，可以在这里配置正则表达式
+          const EXCLUDE_REGEXP = [
+            /体育05\d+/,   // 这行可以自动屏蔽“体育05”开头的任意数字分组（如 体育0527、体育0528 等）
+            // /测试.*/    // 屏蔽所有以“测试”开头的分组
+          ];
+          // =======================================================
+
+          const inputFile = path.join(__dirname, 'config', 'abc123.m3u');
+          const outputFile = path.join(__dirname, 'abc123.m3u');
+
+          if (!fs.existsSync(inputFile)) {
+            console.error("未找到源文件: " + inputFile);
+            process.exit(1);
+          }
+
+          const data = fs.readFileSync(inputFile, 'utf8');
+          const lines = data.split(/\r?\n/);
+          const resultLines = [];
+
+          // 保留第一行 M3U 头部
+          if (lines.length > 0) {
+            resultLines.push(lines[0]);
+          }
+
+          for (let i = 1; i < lines.length; i++) {
+            const line = lines[i];
+            if (!line.trim()) continue;
+
+            if (line.startsWith('#EXTINF:')) {
+              const groupMatch = line.match(/group-title="([^"]+)"/);
+              let shouldExclude = false;
+
+              if (groupMatch) {
+                const groupTitle = groupMatch[1];
+
+                // 检查精确屏蔽名单
+                if (EXCLUDE_EXACT.includes(groupTitle)) {
+                  shouldExclude = true;
+                }
+
+                // 检查正则模糊屏蔽名单
+                if (!shouldExclude) {
+                  for (const regex of EXCLUDE_REGEXP) {
+                    if (regex.test(groupTitle)) {
+                      shouldExclude = true;
+                      break;
+                    }
+                  }
+                }
+              }
+
+              if (shouldExclude) {
+                // 如果命中屏蔽名单，跳过当前 #EXTINF 行，并且跳过紧随其后的下一行（播放地址 URL）
+                i++; 
+                continue;
+              }
+            }
+
+            resultLines.push(line);
+          }
+
+          fs.writeFileSync(outputFile, resultLines.join('\n'), 'utf8');
+          console.log("过滤处理成功！已在根目录下生成干净的 abc123.m3u 文件。");
+          EOF
+          
+          # 执行过滤脚本
+          node filter.js
+          # 删除生成的临时脚本
+          rm filter.js
+
+      # 4. 提交两个文件回 GitHub 仓库
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # 仅添加 config 目录下的 m3u 文件
-          git add config/abc123.m3u
+          # 同时跟踪 config 文件夹中的原文件和根目录下的过滤文件
+          git add config/abc123.m3u abc123.m3u
           
-          # 判断文件是否有更新
           if git diff --staged --quiet; then
             echo "文件无变化，跳过提交。"
           else
-            git commit -m "自动更新 config/abc123.m3u"
+            git commit -m "自动下载并过滤生成根目录 M3U 文件"
             git push
           fi
